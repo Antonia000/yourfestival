@@ -1,0 +1,42 @@
+<div class="main row mt-3">
+    <div class="card col-lg-5 col-sm-12 p-3 m-2"  
+         *ngFor="let festival of festivals"
+         [ngStyle]="{ 'background-image': 'linear-gradient( rgba(231, 234, 254,0.9),rgba(255, 179, 255,0.8) ), url(' + festival.image + ')'}">
+
+        <div class="card designCard" 
+            (click)="handleClick(festival.name)">
+            <div class="row">
+                <div class="col-md-7 col-8 name">
+                    <h4 class="mb-3">{{festival.name}}</h4>
+                </div>
+                <div class="col-md-5 col-4">
+                <div *ngFor="let booking of bookedTickets">
+                    <span *ngIf="booking.festival == festival?.name"
+                        class="tickets"> 
+                        <span class="text-success icon">
+                            <i class="fa fa-ticket" aria-hidden="true"></i> 
+                        </span>  
+                        <span>
+                            {{booking.tickets}} {{booking.tickets == '1' ? 'ticket' : 'tickets'}} booked
+                        </span> 
+                     
+                    </span>
+                </div>
+            </div>
+            </div>
+            <p  *ngFor="let session of festival.sessions"
+                [ngClass]="['Date']" 
+                > From
+                <span>{{ session?.dateStart  | date :'longDate'}}    </span>
+                <span> until {{session?.dateEnd | date :'longDate'}} </span>
+            </p>
+            <p class="artists">{{festival.artists}}</p>
+            <p>Starting at {{festival.ticketPrice | currency : 'EUR'}}</p>
+            <div class="row">
+            <div class="col-md-9">
+                <p><span><i class="fa fa-map-pin "></i></span> {{festival.location.city}},  {{festival.location.country}}</p>
+            </div>
+            </div>  
+        </div>
+    </div>
+</div>

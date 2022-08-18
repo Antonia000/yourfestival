@@ -1,0 +1,52 @@
+<div class="container mt-5">
+        <h1>{{festival?.name}}</h1>
+        <hr class="my-4">
+        <div class="row m-2 justify-content-center">  
+            <div class="col-12 card" 
+             *ngFor="let session of festival?.sessions"
+             [ngStyle]="{ 'background-image': 'linear-gradient( rgba(231, 234, 254,0.9),rgba(255, 0, 255,0.7) ), url(' + festival.image + ')'}">
+                <div class="name">
+                    <h2>{{session.id}}</h2>
+                    <h3>Session {{session?.dateStart | date : 'MMMM'}}</h3>
+                </div>
+                <h5  [ngClass]="['Date']">
+                    <span>{{ session?.dateStart | date :'longDate'}}   </span>
+                    <span> until {{ session?.dateEnd | date :'longDate'}}</span>
+                    <h4>Please check your ticket to find out the starting hour</h4>
+                </h5>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12 card session-details">
+                        <div>
+                            <h4><i class="fa fa-users fa-2x" aria-hidden="true"></i></h4>
+                            <h5>{{festival.artists}}</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 card session-details">
+                        <div>
+                            <h4>
+                                <div><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i></div>
+                                {{festival.location.city}},
+                                <span>
+                                    {{festival.location.country}}
+                                </span>   
+                            </h4>
+                        </div>  
+                    </div>
+                    <div class="col-lg-3 col-sm-12 card session-details">
+                        <div>
+                            <h4><i class="fa fa-gift fa-2x" aria-hidden="true"></i></h4>
+                            <div>
+                                <p>Food Stands</p>
+                                <p>Story Board</p>
+                                <p>Artist Backstage Access</p>
+                                <p>Free Cocktails</p>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div class="book">
+                    <button class="book-button" (click)="handleClick(festival.name,session.id)">Book</button>
+                </div> 
+            <div>
+        </div>
+    </div>

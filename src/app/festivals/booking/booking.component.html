@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row mt-5">
+
+        <h2>Book your ticket</h2>
+        <hr>
+        <div class="col-md-5 my-2" *ngFor="let type of this.subscriptionType">
+            <div class="card">
+                <span [ngStyle]="{'color': '#ffccff'}">{{type}}</span>
+                <h5>
+                    <h4>Book for {{festivalName}} </h4>
+                    <h4>Session {{session.dateStart | date : 'MMMM'}}</h4>
+                </h5>
+
+                <div class="date">
+                    <p class="m-0">{{session.dateStart | date : 'longDate'}}</p>
+                    <p class="m-0">{{session.dateEnd | date : 'longDate'}}</p>
+                </div>
+
+                <div>
+                    <span>Select number of tickets</span>
+                    <form>
+                         <input type="number" value="1" min="1" max="5" step="1" name="tickets" (change)="changePrice(tickets,i)" #tickets/>
+                    </form>
+                </div>
+
+                <div class="price">
+                    <h5>{{(this.price[i] ? this.price[i] : session.price[i]) | currency :'EUR'}}
+                    </h5>   
+                </div>
+
+                <span class="info">*You will receive an email with your tickets and  details about the event.</span> 
+                <button type="button" class="book-button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" (click)="gatherData(tickets, type)">
+                    Book
+                </button>
+
+                <!-- Modal"-->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" #modal>
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirm booking</h5>
+                        </div>
+                        <div class="modal-body">
+                            You are about to book {{bookedTickets}} {{bookedTickets > '1' ? ' tickets' : ' ticket'}} at {{festivalName}}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn cancel-button" data-bs-dismiss="modal" (click)="closeModal()">Cancel</button>
+                        <button type="button" class="btn book-button" data-bs-dismiss="modal" (click)="bookTickets()">Book tickets</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                  
+
+            </div>
+         </div>
+    </div>
+ </div>

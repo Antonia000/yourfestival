@@ -1,0 +1,49 @@
+<div class="container-fluid footer">
+    <div class="row footer-content">
+        <div class="col-lg-4">
+            <h4 class="m-0">Social Links</h4>
+                <div class="row d-grid">
+                        <div>
+                           <a href="#"><i class="fa fa-instagram social"></i></a> <p> @yourfestival</p>
+                        </div>
+                        <div>
+                            <a href="#"><i class="fa fa-facebook social"></i></a> 
+                            <p>Your Festival</p>
+                         </div>
+
+                         <div>
+                            <a href="#"><i class="fa fa-snapchat-ghost social"></i></a> 
+                            <p>@yourfestivalsnap</p>
+                         </div>
+                </div>
+        </div>
+        <div class="col-lg-4 col-sm-12 mb-4">
+            <h4 class="m-0">Contact</h4>
+            <div class="contact-form">
+                <form [formGroup]="contactForm" (ngSubmit)="receiveFeedback()">
+                    <input type="text" placeholder="Email..." formControlName="email" required/>
+                    <br>
+                    <textarea placeholder="Message..." formControlName="message" required></textarea>
+                    <button>Send</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-12">
+            <h4 class="m-0">Useful Links</h4>
+            <ul>
+            <li><a [routerLink]='["home"]'>Home</a></li>
+            <li><a [routerLink]='["festivals"]'>Upcoming festivals</a></li>
+            <li><a [routerLink]='["news"]'>News</a></li>
+            <li><a [routerLink]='["tickets"]'>Tickets</a></li>
+            <li><a [routerLink]='["contact"]'>Contact</a></li>
+            <li><a [routerLink]='["maps/Neversea Festival"]'>Maps</a></li>
+            </ul>
+        </div>
+        
+        <div class="row">
+            <hr class="mt-4">
+            <span><i class="fa fa-copyright"></i>  All rights reserved.</span>
+        </div>  
+    </div>
+</div>  

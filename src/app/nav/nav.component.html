@@ -1,0 +1,149 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark gradient-custom">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Your festival</a>
+
+    <!-- Toggle button -->
+    <button class="navbar-toggler p-3" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent" aria-bs-controls="navbarSupportedContent" aria-bs-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fa fa-bars text-light"></i>
+    </button>
+
+    <div class="collapse navbar-collapse mobile-collapse"
+          id="navbarSupportedContent"
+          *ngIf="resizeListener() <= 1000">
+        <ul class="navbar-nav d-grid flex-end mt-3 mt-lg-0">
+          <li class="nav-item text-center mx-2 mx-lg-3" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+            <a class="nav-link" aria-current="page" [ngClass]="{'active' : this.currentRoute === '/home'}"
+               [routerLink]="['home']">
+             Home 
+            </a>
+          </li>
+          <li class="nav-item text-center mx-2 mx-lg-1" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+            <a class="nav-link" [routerLink]="['festivals']" [ngClass]="{'active' : this.currentRoute === '/festivals'}">
+              Festivals
+            </a>
+          </li>
+          <li class="nav-item text-center mx-2 mx-lg-1" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+            <a class="nav-link" [routerLink]="['festivals/tickets']" [ngClass]="{'active' : this.currentRoute === '/festivals/tickets'}">
+              Tickets
+            </a>
+          </li>
+          <li class="nav-item text-center mx-2 mx-lg-1" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+            <a class="nav-link" [routerLink]="['news']" [ngClass]="{'active' : this.currentRoute === '/news'}">
+              News
+            </a>
+          </li>
+          <li class="nav-item text-center mx-2 mx-lg-1" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+            <a class="nav-link" [routerLink]="['contact']" [ngClass]="{'active' : this.currentRoute === '/contact'}">
+              Contact
+            </a>
+          </li>
+          
+        </ul>
+    </div>
+    <!-- Collapsible wrapper -->
+    <div *ngIf="resizeListener() > 1000" class="navbar-collapse">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
+        <li class="nav-item text-center mx-2 mx-lg-3">
+          <a class="nav-link" aria-current="page" [ngClass]="{'active' : this.currentRoute === '/home'}"
+             [routerLink]="['home']">
+            <div>
+              <i class="fa fa-home fa-lg mb-1"></i>
+            </div>
+           Home 
+          </a>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" [routerLink]="['festivals']" [ngClass]="{'active' : this.currentRoute === '/festivals'}">
+            <div>
+              <i class="fa fa-calendar fa-lg mb-1"></i>
+              <span class="badge rounded-pill badge-notification bg-dark"></span>
+            </div>
+            Festivals
+          </a>
+        </li>
+         <!-- Dropdown menu -->
+        <li class="nav-item dropdown mx-2 mx-lg-1">
+            <a class="dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false" [ngClass]="{'active' : this.currentRoute.slice(0,5) === '/maps'}">
+              <div>
+                <i class="fa fa-map fa-lg mb-1 icon"></i>
+                <span class="badge rounded-pill badge-notification bg-dark"></span>
+              </div>
+              Maps
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" 
+                 *ngFor="let festival of festivals"
+                 (click)="handleClick(festival.name)">
+                 {{festival.name}}
+                </a>
+            </div>
+          </li>
+      </ul>
+      <!-- Left links -->
+
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
+        <!-- Search form -->
+        <li class="nav-item text-center mx-2 mt-2 mx-lg-1">
+          <div class="search-box">
+            <form class="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
+            
+                <input type="text" color = "accent"placeholder="Search festival..."
+                  matInput
+                  [formControl]="search"
+                  [matAutocomplete]="auto"  />
+                  <mat-autocomplete #auto="matAutocomplete" >
+                    
+                    <mat-option *ngFor="let option of this.filteredOptions | async" [value]="option">
+                      <span>{{option}}</span>
+                    </mat-option>
+                  </mat-autocomplete>    
+            </form>
+            <button  color="accent" mat-flat-button (click)="handleSearch()">Search</button>
+            </div>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" [routerLink]="['festivals/tickets']" [ngClass]="{'active' : this.currentRoute === '/festivals/tickets'}">
+            <div>
+              <i class="fa fa-ticket fa-lg mb-1"></i>
+              <span class="badge rounded-pill badge-notification bg-dark"></span>
+            </div>
+            Tickets
+          </a>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" [routerLink]="['news']" [ngClass]="{'active' : this.currentRoute === '/news'}">
+            <div>
+              <i class="fa fa-globe fa-lg mb-1"></i>
+              <span class="badge rounded-pill badge-notification bg-dark"></span>
+            </div>
+            News
+          </a>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" [routerLink]="['contact']" [ngClass]="{'active' : this.currentRoute === '/contact'}">
+            <div>
+              <i class="fa fa-address-book fa-lg mb-1"></i>
+              <span class="badge rounded-pill badge-notification bg-dark"></span>
+            </div>
+            Contact
+          </a>
+        </li>
+        
+      </ul>
+
+      <!-- Right links -->
+  
+    </div>
+    
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

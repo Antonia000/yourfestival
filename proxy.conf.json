@@ -1,0 +1,9 @@
+{
+    "/t/*": {
+      "target": "https://ptsv2.com/t/0y4n4-1659608603/post",
+      "secure": true,
+      "changeOrigin": true,
+      "logLevel":"debug",
+      "pathRewrite": {"^/t": ""}
+    }
+  }

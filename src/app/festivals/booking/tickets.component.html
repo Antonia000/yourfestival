@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row mt-5 m-2">
+        <h2>Your tickets</h2>
+        <hr>
+        <div *ngIf="this.serviceData">
+            <div *ngFor="let data of this.serviceData" class="card mb-3">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3 class="m-0">{{data.festival}}</h3>
+                        <p class="text-success">Session {{data.session.dateStart | date : 'MMMM' | lowercase}}</p>
+                        <span class="mt-4">check your mail to find booked tickets</span>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <p class="text-success">{{data.tickets}} x {{ data.tickets == 1 ? 'ticket' : 'tickets'}} </p>
+                        <p class="category">{{data.category}} category</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p *ngIf="!this.serviceData">You have no bookings yet!</p>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap');
+@import '~@angular/material/theming';
+
+
+$my-custom-typography: mat.define-typography-config(
+  $headline:  mat.define-typography-level(2.2rem, 1, 400),
+  $title: mat.define-typography-level(32px, 20px, 400),
+  $subheading-2: mat.define-typography-level(26px, 40px, 400),
+  $subheading-1: mat.define-typography-level(22px, 40px, 400),
+  $body-1: mat.define-typography-level(16px, 22px, 400),
+  $caption: mat.define-typography-level(14px, 22px, 400),
+  $font-family: Poppins,
+);
+
+$my-palette-purple: (
+    50:  #F8EEFE,
+    100: #EDD4FC,
+    200: #E2B8FA,
+    300: #D69CF8 ,ccc
+    400: #CD86F7,
+    500: #C471F5,
+    600: #BE69F4 ,
+    700: #B65EF2,
+    800: #AF54F0 ,
+    900: #A242EE,
+    A100: #ffffff,
+    A200: #FFFFFF,
+    A400: #EDD9FF,
+    A700: #E2BFFF,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: $black-87-opacity,
+        400: $black-87-opacity,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: $black-87-opacity,
+        A200: $black-87-opacity,
+        A400: $black-87-opacity,
+        A700: white,
+    )
+);
+$my-palette-pink: (
+    50: #FEEEF9,
+    100: #FED4F0,
+    200: #FDB8E6,
+    300: #FC9CDC,
+    400: #FB86D5,
+    500: #FA71CD,
+    600: #F969C8,
+    700: #F95EC1 ,
+    800: #F854BA,
+    900: #F642AE,
+    A100: #FFFFFF,
+    A200: #FFFFFF,
+    A400: #FFE1F3,
+    A700: #FFC8E8,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: $black-87-opacity,
+        400: $black-87-opacity,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: $black-87-opacity,
+        A200: $black-87-opacity,
+        A400: $black-87-opacity,
+        A700: white,
+    )
+);
+
+$my-primary: mat.define-palette($my-palette-purple);
+$my-accent: mat.define-palette($my-palette-pink);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+ )
+));
+
+
+@mixin candy-carousel-theme($my-theme) {
+
+  $primary: map-get($my-palette-purple, primary);
+  $accent: map-get($my-palette-purple, accent);
+
+  .candy-carousel {
+    background-color: mat-color($primary, '200');
+    border-color: mat-color($accent, A400);
+    padding:20px;
+  }
+}
+
+
+@include angular-material-theme($my-theme); //including the theme
+@include angular-material-typography($my-custom-typography);
+@include mat.all-component-themes($my-theme);
+@include mat.core($my-custom-typography);

@@ -1,0 +1,45 @@
+<div class="row">
+    <div    *ngFor="let film of this.films.results"
+            class="card col-md-10 p-4 mb-3">
+            <div class="row">
+                <div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3>{{film.title}}</h3>
+                        </div>
+                        <div class="col-md-3 seen">
+                             <p>
+                                
+                                <mat-checkbox></mat-checkbox>
+                                <input type="checkbox" class="form-check-input" (click)="checkMovie(film.title)" [checked]="seenMoviesUpdated.includes(film.title)"/> mark as seen
+                            </p>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <div> Director : 
+                            <span>{{film.director}}</span>
+                        </div>
+                        <div> Release date : 
+                            <span>{{film.release_date}}</span>
+                        </div>      
+                    </div>  
+                    <p>{{film.opening_crawl}}</p>
+                    </div>
+                    <a><h5 class="characters"
+                        (click)="showDetails(film.episode_id)"
+                        >Characters 
+                        <i class="fa fa-arrow-down"
+                            *ngIf="!isClicked"></i>
+                            <i class="fa fa-arrow-up"
+                            *ngIf="isClicked"></i>
+                        </h5>
+                    </a>
+                    <div *ngIf="done && film.episode_id === currentId && isClicked" 
+                        class="characters">
+                        <div *ngFor="let char of characters; let i=index">
+                            <span *ngIf="i != 0"> {{i}}. {{char.name}}, Mass: {{char.mass}}</span>
+                        </div>
+                    </div>       
+            </div>
+     </div>
+</div>
